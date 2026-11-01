@@ -1,0 +1,18 @@
+{
+  "dem": {
+    "path": "dem_64x64.pt",
+    "sha256": "SUPPLY_LOCALLY",
+    "units": "UNVERIFIED",
+    "coregistration": "UNVERIFIED"
+  },
+  "checkpoint": {
+    "path": "selected_model.pth",
+    "sha256": "SUPPLY_LOCALLY",
+    "source_revision": "version1.0",
+    "training_config": "MISSING"
+  },
+  "dataset": {
+    "timezone": "NOT_ENFORCED_BY_CODE",
+    "interval_seconds": "ASSUMED_360_NOT_CHECKED"
+  }
+}

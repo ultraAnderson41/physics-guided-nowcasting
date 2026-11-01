@@ -1,0 +1,7 @@
+{
+  "pwv_dir": "data/DATA_2025_S/PWV_2025_S",
+  "radar_dir": "data/DATA_2025_S/RADAR_2025_S",
+  "dem": "data/dem_64x64.pt",
+  "checkpoint": "data/selected_model.pth",
+  "output_dir": "runs/local_v1"
+}

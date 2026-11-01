@@ -1,0 +1,7 @@
+# 训练、选模与指标
+历史脚本原常数见configs/historical_protocol.json。没有随机seed设置、配置解析器或checkpoint协议身份。
+P1：30轮，AdamW lr5e−4/wd1e−4，batch4、累积4，ReduceLROnPlateau(mode=min,factor=.5,patience=5)，早停10、grad_clip5。CUDA FP16 autocast和GradScaler；代码选择CPU后仍使用CUDA autocast，不能宣称CPU正式训练经过兼容。loss=.60*PWV加权Radar MSE+.15*SSIM+.10*PWV MSE+.05*psi harmonic+.10*Lap(div运动)；按Val总loss保存原始state_dict为best_model.pth。最后不足4个batch也仍除4，保留该历史行为。
+PWV权重w=1+15*(target_P−batchmin)/(batchmax−batchmin+1e−8)，空间中心高斯sigma15，时间权重t/sum(t)，后期权重大。Radar MSE分子含时间权重、分母sum(w*space)又包含所有T；这会额外缩小约T倍，未修复。SSIM weighted numerator含B与时间，分母仅space.sum，Batch缩放不正确；默认11×11高斯sigma1.5。psi正则为Lap(psi)^2均值，div正则对前向差分散度作Lap后L1均值。没有额外ERA5正则。
+P2：20轮，G AdamW base1e−4、outc1e−6（没有真正freeze，其他物理参数也在base组），D2e−4/betas(.5,.999)，wd1e−4。D hinge=mean(ReLU(1−Dreal))+mean(ReLU(1+Dfake))，G adv=−mean(Dfake)。G目标=.60*MSE+.20*SSIM+.10*div+.05*adv；没有P1的PWV一致性/psi项，因此不是P1+GAN；保留不统一的旧目标。G/D均FP16 GradScaler，每轮保存gan_model_epoch_N，同时best_gan_model.pth其实是最后一轮别名，没有Val选模。
+test.py：最后15%索引样本，batch8，缺权重原版随机推理；包装器硬拒绝此回退。主阈值10mm/h，另1/5/10/20mm/h，没有16或32正式阈值。CSI=TP/(TP+FN+FP)，POD=TP/(TP+FN)，FAR=FP/(TP+FP)，分母0均返回0；逐样本再平均，不是聚合TPFPFN的micro。Neighborhood先对真/预测分别5×5最大值膨胀（SciPy默认边界），不能与严格像素CSI混用；FSS用5×5 uniform、zero padding，空真/预返回0。SSIM评价用SciPy高斯sigma1.5，与训练版padding不同。MSE为归一化Radar平方误差；PSD为T+60（索引9）的FFT径向功率平均。持久性为最后输入Radar复制20次。
+原版没有AreaBias、事件分组或micro CSI输出。选最强示例是在Test前300样本内按真值>=10mm/h面积挑选，只用于展示但有视觉挑选偏差。输出仅图，不是完整可复算指标表。不能引用旧图片推定实际性能。正式训练/全量评估与历史指标复现均BLOCKED，缺数据权重且不在本次执行范围。

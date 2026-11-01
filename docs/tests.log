@@ -1,0 +1,16 @@
+test_cardinal_warp (test_release.ReleaseTests) ... ok
+test_cli_help (test_release.ReleaseTests) ... ok
+test_dataset_resize_channel_order_and_unchecked_gaps (test_release.ReleaseTests) ... ok
+test_discriminator (test_release.ReleaseTests) ... ok
+test_forward_and_backward (test_release.ReleaseTests) ... ok
+test_gate_original_semantics (test_release.ReleaseTests) ... ok
+test_imports (test_release.ReleaseTests) ... ok
+test_metrics (test_release.ReleaseTests) ... ok
+test_missing_asset_refusal (test_release.ReleaseTests) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 4.860s
+
+OK
+PhysicsWarper: �ɹ����ص������� (dem_64x64.pt)��
+PhysicsWarper: �ɹ����ص������� (dem_64x64.pt)��

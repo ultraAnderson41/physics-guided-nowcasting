@@ -1,0 +1,31 @@
+{
+  "status": "AUDITED_HARDCODED_NOT_OVERRIDES",
+  "input_steps": 10,
+  "output_steps": 20,
+  "shape": [
+    64,
+    64
+  ],
+  "dataset_default_stride": 5,
+  "training_stride": 10,
+  "test_stride": 5,
+  "split": "index 70%/15%/15% on each script dataset; no temporal purging",
+  "phase1": {
+    "epochs": 30,
+    "batch_size": 4,
+    "accumulation": 4,
+    "lr": 0.0005,
+    "weight_decay": 0.0001,
+    "early_stop": 10,
+    "precision": "FP16 CUDA"
+  },
+  "phase2": {
+    "epochs": 20,
+    "batch_size": 4,
+    "base_lr": 0.0001,
+    "head_lr": 1e-06,
+    "discriminator_lr": 0.0002,
+    "lambda_adv": 0.05
+  },
+  "seed": null
+}

@@ -1,0 +1,27 @@
+{
+  "syntax": "PASS",
+  "five_original_sources_byte_identical": "PASS",
+  "same_weights_synthetic_nonflat_dem_six_output_max_abs_difference": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "sensitive_pattern_and_large_asset_scan": {
+    "status": "PASS",
+    "findings": [],
+    "scope": "explicit patterns, not an absolute proof of absence"
+  },
+  "original_tree_unchanged": {
+    "files": 25,
+    "small_files_sha_and_all_stat_match": true,
+    "large_binaries_sha_computed": false
+  },
+  "markdown_relative_links": "PASS",
+  "training": "BLOCKED: no supplied data/checkpoints/GPU run",
+  "historical_skill": "BLOCKED: no matching trained weights or experiment records",
+  "license": "PENDING_OWNER_CONFIRMATION",
+  "reference_github": "BLOCKED_FETCH: provided link not inspected; API rate limited"
+}
